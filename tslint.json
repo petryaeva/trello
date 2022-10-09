@@ -1,0 +1,50 @@
+{
+	"extends": ["tslint:recommended", "tslint-react"],
+	"rules": {
+		"indent": [true, "tabs", 4],
+		"quotemark": false,
+		"ordered-imports": false,
+		"no-shadowed-variable": false,
+		"member-access": false,
+		"arrow-parens": false,
+		"max-line-length": {
+			"options": [120]
+		},
+		"new-parens": true,
+		"import-spacing": false,
+		"no-arg": true,
+		"no-any": true,
+		"no-angle-bracket-type-assertion": false,
+		"semicolon": [true, "always", "ignore-bound-class-methods"],
+		"no-bitwise": true,
+		"no-conditional-assignment": true,
+		"no-consecutive-blank-lines": false,
+		"no-empty-interface": true,
+		"no-console": [true, "log", "error"],
+		"no-duplicate-imports": [true, {"allow-namespace-imports": true}],
+		"eofline": true,
+		"trailing-comma": [true, {"multiline": "always", "singleline": "never", "esSpecCompliant": true}],
+		"whitespace": [
+			true,
+			"check-branch",
+			"check-operator",
+			"check-typecast",
+			"check-module",
+			"check-rest-spread"
+		],
+		"object-literal-sort-keys": false,
+		"variable-name": false,
+		"member-ordering": [true, "fields-first"],
+		"no-empty": [true, "allow-empty-catch"],
+		"no-namespace": false,
+		"align": false,
+
+		"jsx-no-multiline-js": false,
+		"jsx-no-lambda": false,
+		"jsx-boolean-value": [true, "never"],
+		"max-classes-per-file": false,
+		"interface-over-type-literal": false,
+		"newline-before-return": true,
+		"curly": [true, "ignore-same-line"]
+	}
+}

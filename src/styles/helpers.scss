@@ -1,0 +1,14 @@
+.g--no-wrap {
+	white-space: nowrap;
+	flex-wrap: nowrap;
+}
+
+.g--ellipsis {
+	@extend %overflow_ellipsis;
+}
+
+%overflow_ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
