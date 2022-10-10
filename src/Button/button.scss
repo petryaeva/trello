@@ -7,4 +7,9 @@
     cursor: pointer;
     padding: 0;
     color: $gray;
+    padding: 5px;
+
+    &:hover {
+        background: #091e4214;
+    }
 }

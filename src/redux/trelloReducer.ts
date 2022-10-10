@@ -25,6 +25,39 @@ export default function trelloReducer(
 			};
 		}
 
+		case types.CREATE_TASK: {
+			const {columnID, text, id} = action.payload;
+
+			return {
+				lists: state.lists.map(item => {
+					if (item.id === columnID) {
+						return {...item, tasks: [...item.tasks, {id, text}]}
+					} else {
+						return item;
+					}
+				}),
+			};
+		}
+
+		case types.UPDATE_TASK: {
+			const {columnID, text, id} = action.payload;
+
+			return {
+				lists: state.lists.map(item => {
+					if (item.id === columnID) {
+						const updatedTask = item.tasks.map(task => task.id === id
+							? {...task, text}
+							: task
+						);
+
+						return {...item, tasks: updatedTask}
+					} else {
+						return item;
+					}
+				}),
+			};
+		}
+
 		default: return state;
 	}
 }

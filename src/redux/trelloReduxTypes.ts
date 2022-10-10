@@ -1,9 +1,7 @@
-// export type DefaultSelectOptions = Omit<SelectOptions, 'value'> & {value: number[]};
-
-import { SET_COLUMN_TITLE } from './trelloActionTypes';
+import { CREATE_TASK, SET_COLUMN_TITLE, UPDATE_TASK } from './trelloActionTypes';
 
 export interface ITrelloTask {
-	id: number,
+	id: string,
 	text: string,
 }
 
@@ -23,5 +21,16 @@ export interface ISetColumnTitle {
 	payload: Pick<ITrelloList, 'id' | 'title'>;
 }
 
-export type ITrelloActionsTypes = ISetColumnTitle;
-	// | ISetCvHistorySeancesAction;
+export interface ICreateTask {
+	type: typeof CREATE_TASK;
+	payload: ITrelloTask & {columnID: number};
+}
+
+export interface IUpdateTask {
+	type: typeof UPDATE_TASK;
+	payload: ITrelloTask & {columnID: number};
+}
+
+export type ITrelloActionsTypes = ISetColumnTitle
+	| ICreateTask
+	| IUpdateTask;

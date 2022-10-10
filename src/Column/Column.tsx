@@ -1,69 +1,79 @@
-import { useState, useCallback } from "react";
-import { MdOutlineAdd } from "react-icons/md";
+import _ from 'lodash';
+import { useState, useCallback } from 'react';
+import { MdOutlineAdd } from 'react-icons/md';
 import cn from 'classnames';
-import { COLORS } from "../app/ColorsConstants";
-import Button from "../Button/Button";
-import "./column.scss";
-import { ITrelloList } from "../redux/trelloReduxTypes";
-import { useDispatch } from "react-redux";
-import { setColumnTitle } from "../redux/trelloActionCreators";
-import { ENTER_KEY } from "../app/constants";
+import { COLORS } from '../app/ColorsConstants';
+import Button from '../Button/Button';
+import './column.scss';
+import { ITrelloList } from '../redux/trelloReduxTypes';
+import { useDispatch } from 'react-redux';
+import { createTask, setColumnTitle } from '../redux/trelloActionCreators';
+import { ENTER_KEY } from '../app/constants';
+import Task from '../Task/Task';
 
 function Column({id, title, tasks}: ITrelloList) {
-  const dispatch = useDispatch();
-  const [header, setHeader] = useState(title);
-  const [isEditHeader, setIsEditHeader] = useState(false);
+	const dispatch = useDispatch();
+	const [header, setHeader] = useState(title);
+	const [isEditHeader, setIsEditHeader] = useState(false);
 
-  const setActiveTextarea = () => {
-    // TODO: add focus on textarea when click by header
-    // headerRef.current?.focus();
-    setIsEditHeader(true);
-  }
+	const setActiveTextarea = () => {
+		// TODO: add focus on textarea when click by header
+		// headerRef.current?.focus();
+		setIsEditHeader(true);
+	}
 
-  const getEditedHeader = useCallback((event) => {
-    const text = event.target.value;
+	const getEditedHeader = (event) => {
+		const text = event.target.value;
 
-    setHeader(text);
-	}, []);
+		setHeader(text);
+	};
 
-  const setEditedHeader = useCallback((event) => {
-    if (event.keyCode === ENTER_KEY) {
-      console.log('kek');
-      event.preventDefault();
-      dispatch(setColumnTitle(header, id));
-      setIsEditHeader(false);
-    }
-	}, [id, header]);
+	const setEditedHeader = (event) => {
+		if (event.keyCode === ENTER_KEY) {
+			event.preventDefault();
+			dispatch(setColumnTitle(header, id));
+			setIsEditHeader(false);
+		}
+	};
+
+	const handleCreateTask = useCallback(() => {
+		const defaultText = 'Some text';
+		const taskID = _.uniqueId("prefix-");
+
+		dispatch(createTask(defaultText, taskID, id));
+	}, [id]);
 
   return (
-    <section className="column" tabIndex={1} key={id}>
-      <div className="column__header" onFocus={setActiveTextarea} onClick={setActiveTextarea}>
-          <h2 className="g--ellipsis" tabIndex={2}>{header}</h2>
-          <textarea
-            onChange={getEditedHeader}
-            onKeyDown={setEditedHeader}
-            value={header}
-            autoFocus
-            className={cn('column__header-textarea', {'column__header-textarea--visible': isEditHeader})}
-            aria-label={header}
-            maxLength={100}
-          >
-            {header}
-          </textarea>
-      </div>
+	<section className="column" tabIndex={1} key={id}>
+		<div className="column__header" onFocus={setActiveTextarea} onClick={setActiveTextarea}>
+			<h2 className="g--ellipsis" tabIndex={2}>{header}</h2>
+			<textarea
+				onChange={getEditedHeader}
+				onKeyDown={setEditedHeader}
+				value={header}
+				autoFocus
+				className={cn('column__header-textarea', {'column__header-textarea--visible': isEditHeader})}
+				aria-label={header}
+				maxLength={100}
+			>
+				{header}
+			</textarea>
+		</div>
 
-      {tasks && <div className="column__content">
-        {tasks.map(item => <>{item}</>)}
-      </div>}
+		{tasks &&
+			<div className="column__content">
+				{tasks.map(item => <Task key={item.id} id={item.id} text={item.text} columnID={id} />)}
+			</div>
+		}
 
-      <Button text="Добавить карточку">
-        <MdOutlineAdd
-          color={COLORS.gray}
-          size={18}
-          className="column__btn-icon"
-        />
-      </Button>
-    </section>
+		<Button text="Добавить карточку" onClick={handleCreateTask}>
+			<MdOutlineAdd
+			color={COLORS.gray}
+			size={18}
+			className="column__btn-icon"
+			/>
+		</Button>
+	</section>
   );
 }
 
