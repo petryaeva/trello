@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ENTER_KEY } from '../app/constants';
 import { updateTask } from '../redux/trelloActionCreators';
 
-type Props = {columnID: number} & ITrelloTask;
+type Props = {columnID: string} & ITrelloTask;
 
 function Task({id, text, columnID}: Props) {
 	const dispatch = useDispatch();

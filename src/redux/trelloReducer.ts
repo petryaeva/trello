@@ -3,7 +3,7 @@ import * as types from './trelloActionTypes';
 
 export const initialState: TrelloState = {
 	lists: [{
-		id: 0,
+		id: 'column-0',
 		title: 'Some title',
 		tasks: [],
 	}],
@@ -55,6 +55,16 @@ export default function trelloReducer(
 						return item;
 					}
 				}),
+			};
+		}
+
+		case types.CREATE_COLUMN: {
+			return {
+				lists: state.lists.concat({
+					id: action.payload,
+					title: 'Some title',
+					tasks: [],
+				})
 			};
 		}
 

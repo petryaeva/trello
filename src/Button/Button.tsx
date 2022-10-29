@@ -8,9 +8,9 @@ interface IProps {
   className?: String;
 }
 
-function Button({ children, text, className, onClick }: IProps) {
+function Button({ text, onClick, children, className }: IProps) {
   return (
-    <button className={cn("button", { className })} onClick={onClick} >
+    <button className={cn('button', { className })} onClick={onClick} >
       {children ? children : null}
       <span>{text}</span>
     </button>

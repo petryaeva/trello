@@ -1,21 +1,28 @@
 @import './styles/colors.scss';
 @import './styles/helpers.scss';
 
+.app {
+	height: 100vh;
+	overflow-y: hidden;
+	background: $blue900;
+}
+
 .header {
-  width: 100%;
-  height: 40px;
-  background: $darkBlue;
-  padding: 10px;
-  text-align: center;
-  color: white;
-  font-size: 24px;
+	width: 100%;
+	height: 60px;
+	background: $blue900;
+	padding: 10px;
+	color: white;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .main-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  background: $blue;
-  height: 100vh;
-  padding: 20px;
+	display: flex;
+	min-width: max-content;
+	height: calc(100% - 60px);
+	background: $blue800;
+	padding: 20px;
 }

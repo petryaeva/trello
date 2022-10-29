@@ -1,20 +1,27 @@
 @import '../styles/colors.scss';
 
 .column {
-	width: 270px;
-	max-height: calc(100% - 130px);
-	background: $white;
-	border-radius: 3px;
+	min-width: 270px;
+	max-width: 270px;
+	max-height: 100%;
+	background: rgba(236, 239, 241, .8);
+	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
-	overflow: hidden;
-	justify-content: space-between;
+	padding: 15px 20px;
+	height: max-content;
+	margin-right: 15px;
+
+	&:last-child {
+		margin-right: 0;
+	}
 
 	&__header {
 		height: 35px;
 		width: 100%;
 		position: relative;
+		min-height: 30px;
+		margin-bottom: 5px;
 
 		h2 {
 			font-size: 16px;
@@ -22,17 +29,20 @@
 		}
 	}
 
-	&__header-textarea {
+	&__header-editor {
 		width: calc(100% - 3px);
 		max-width: 100%;
 		overflow: hidden;
 		overflow-wrap: break-word;
 		height: 25px;
+		font-size: 16px;
 		position: absolute;
 		top: 0;
 		left: 0;
 		border: none;
 		visibility: hidden;
+		font-weight: bold;
+		color: $gray800;
 
 		&--visible {
 			visibility: visible;
@@ -40,13 +50,7 @@
 	}
 
 	&__content {
-		padding: 5px;
-		max-height: calc(100% - 80px);
 		overflow: auto;
-		margin-bottom: 5px;
-	}
-
-	&__btn-icon {
-		margin-right: 5px;
+		margin-bottom: 15px;
 	}
 }

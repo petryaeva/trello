@@ -1,4 +1,4 @@
-import { CREATE_TASK, SET_COLUMN_TITLE, UPDATE_TASK } from './trelloActionTypes';
+import * as type from './trelloActionTypes';
 
 export interface ITrelloTask {
 	id: string,
@@ -6,7 +6,7 @@ export interface ITrelloTask {
 }
 
 export interface ITrelloList {
-	id: number,
+	id: string,
 	title: string,
 	tasks: ITrelloTask[],
 }
@@ -17,20 +17,26 @@ export type TrelloState = {
 
 
 export interface ISetColumnTitle {
-	type: typeof SET_COLUMN_TITLE;
+	type: typeof type.SET_COLUMN_TITLE;
 	payload: Pick<ITrelloList, 'id' | 'title'>;
 }
 
 export interface ICreateTask {
-	type: typeof CREATE_TASK;
-	payload: ITrelloTask & {columnID: number};
+	type: typeof type.CREATE_TASK;
+	payload: ITrelloTask & {columnID: string};
 }
 
 export interface IUpdateTask {
-	type: typeof UPDATE_TASK;
-	payload: ITrelloTask & {columnID: number};
+	type: typeof type.UPDATE_TASK;
+	payload: ITrelloTask & {columnID: string};
+}
+
+export interface ICreateColumn {
+	type: typeof type.CREATE_COLUMN;
+	payload: string;
 }
 
 export type ITrelloActionsTypes = ISetColumnTitle
 	| ICreateTask
-	| IUpdateTask;
+	| IUpdateTask
+	| ICreateColumn;
