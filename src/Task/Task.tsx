@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import cn from 'classnames';
-import './task.scss';
 import { ITrelloTask } from '../redux/trelloReduxTypes';
 import { useDispatch } from 'react-redux';
 import { ENTER_KEY } from '../app/constants';
 import { updateTask } from '../redux/trelloActionCreators';
+import { TaskEditor, TaskStyled } from './TaskStyled';
 
 type Props = {columnID: string} & ITrelloTask;
 
@@ -34,21 +33,21 @@ function Task({id, text, columnID}: Props) {
 	};
 
   return (
-	<article className="task">
-		<div className="task__text" key={id} onClick={setActiveTextarea}>
+	<TaskStyled>
+		<div key={id} onClick={setActiveTextarea}>
 			{text}
 		</div>
-		<textarea
+		<TaskEditor
+			isEditTask={isEditTask}
 			onChange={getEditedText}
 			onKeyDown={setEditedText}
 			value={newText}
 			autoFocus
-			className={cn('task__textarea', {'task__textarea--visible': isEditTask})}
 			aria-label={newText}
 		>
 			{newText}
-		</textarea>
-	</article>
+		</TaskEditor>
+	</TaskStyled>
   );
 }
 

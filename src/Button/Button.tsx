@@ -1,20 +1,19 @@
-import cn from "classnames";
-import "./button.scss";
+import { ButtonStyled } from "./ButtonStyled";
 
 interface IProps {
-  text: String;
-  onClick: () => void,
-  children?: React.ReactNode;
-  className?: String;
+	text: String;
+	onClick: () => void,
+	children?: React.ReactNode;
+	className?: String;
 }
 
-function Button({ text, onClick, children, className }: IProps) {
-  return (
-    <button className={cn('button', { className })} onClick={onClick} >
-      {children ? children : null}
-      <span>{text}</span>
-    </button>
-  );
+function Button({ text, onClick, children }: IProps) {
+	return (
+		<ButtonStyled onClick={onClick} >
+			{children ? children : null}
+			<span>{text}</span>
+		</ButtonStyled>
+	);
 }
 
 export default Button;

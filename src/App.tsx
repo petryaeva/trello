@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getColumns } from './Column/columnSelectors';
 import Button from './Button/Button';
 import { MdOutlineAdd } from 'react-icons/md';
-import { COLORS } from './app/ColorsConstants';
+import { COLORS } from './styles/colors';
 import { useCallback } from 'react';
 import { createColumn } from './redux/trelloActionCreators';
 import { nanoid } from '@reduxjs/toolkit';

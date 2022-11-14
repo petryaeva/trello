@@ -1,15 +1,14 @@
 import { useState, useCallback } from 'react';
 import { MdOutlineAdd } from 'react-icons/md';
-import cn from 'classnames';
-import { COLORS } from '../app/ColorsConstants';
+import { COLORS } from '../styles/colors';
 import Button from '../Button/Button';
-import './column.scss';
 import { ITrelloList } from '../redux/trelloReduxTypes';
 import { useDispatch } from 'react-redux';
 import { createTask, setColumnTitle } from '../redux/trelloActionCreators';
 import { ENTER_KEY } from '../app/constants';
 import Task from '../Task/Task';
 import { nanoid } from '@reduxjs/toolkit';
+import { ColumnContent, ColumnHeader, ColumnHeaderEditor, ColumnStyled } from './ColumnStyled';
 
 function Column({id, title, tasks}: ITrelloList) {
 	const dispatch = useDispatch();
@@ -44,34 +43,34 @@ function Column({id, title, tasks}: ITrelloList) {
 	}, [id]);
 
 	return (
-		<section className="column" tabIndex={1} key={id}>
-			<div className="column__header" onFocus={setActiveTextarea} onClick={setActiveTextarea}>
+		<ColumnStyled tabIndex={1} key={id}>
+			<ColumnHeader onFocus={setActiveTextarea} onClick={setActiveTextarea}>
 				<h2 className="g--ellipsis" tabIndex={2}>{header}</h2>
-				<input
+				<ColumnHeaderEditor
+					isEditHeader={isEditHeader}
 					onChange={getEditedHeader}
 					onKeyDown={setEditedHeader}
 					value={header}
 					autoFocus
-					className={cn('column__header-editor', {'column__header-editor--visible': isEditHeader})}
 					aria-label={header}
 					maxLength={100}
 				/>
-			</div>
+			</ColumnHeader>
 
 			{!!tasks.length &&
-				<div className="column__content">
+				<ColumnContent>
 					{tasks.map(item => <Task key={item.id} id={item.id} text={item.text} columnID={id} />)}
-				</div>
+				</ColumnContent>
 			}
 
 			<Button text="Добавить карточку" onClick={handleCreateTask}>
 				<MdOutlineAdd
-				color={COLORS.gray800}
-				size={18}
-				className="btn-icon"
+					color={COLORS.gray800}
+					size={18}
+					className="btn-icon"
 				/>
 			</Button>
-		</section>
+		</ColumnStyled>
 	);
 }
 

@@ -1,4 +1,6 @@
 $white: #ECEFF1;
+$blue5: #026AA7;
+$blue10: #0079bf;
 $blue900: #0D47A1;
 $blue800: #1565C0;
 $gray50: #ECEFF1;
@@ -6,6 +8,8 @@ $gray800: #37474F;
 
 :export {
 	white: $white;
+    blue5: $blue5;
+    blue10: $blue10;
     blue800: $blue800;
     blue900: $blue900;
     gray50: $gray50;
